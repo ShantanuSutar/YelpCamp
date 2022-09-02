@@ -54,6 +54,7 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
@@ -68,9 +69,6 @@ app.use('/campgrounds/:id/reviews', reviewRoutes)
 app.get('/', (req, res) => {
     res.render('home')
 })
-
-
-
 
 
 app.all('*', (req, res, next) => {
