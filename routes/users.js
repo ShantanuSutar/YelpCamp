@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
+const { route } = require('./campgrounds');
 
 router.get('/register', (req, res) => [
     res.render('users/register')
@@ -31,4 +32,15 @@ router.post('/login', passport.authenticate('local', { failureFlash: true, failu
     res.redirect('/campgrounds');
 })
 
+
+router.get('/logout', (req, res) => {
+    req.logout(function (err) {
+        req.flash('success', "Goodbye!");
+        res.redirect('/campgrounds')
+    });
+
+})
+
 module.exports = router;
+
+
