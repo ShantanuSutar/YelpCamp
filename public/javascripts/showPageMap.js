@@ -14,4 +14,3 @@ new mapboxgl.Marker()
     .setLngLat(campground.geometry.coordinates)
     .addTo(map)
 
-//   campground.geometry.coordinates
