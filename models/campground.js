@@ -2,14 +2,24 @@ const mongoose = require('mongoose');
 const Review = require('./review');
 const Schema = mongoose.Schema;
 
+
+
+// https://res.cloudinary.com/dnzpep7pn/image/upload/w_300/v1662302460/q_d0ab43.jpg
+
+const ImageSchema = new Schema({
+
+    url: String,
+    filename: String
+
+})
+
+ImageSchema.virtual('thumbnail').get(function () {
+    return this.url.replace('/upload', '/upload/w_200');
+});
+
 const CampgroundSchema = new Schema({
     title: String,
-    images: [
-        {
-            url: String,
-            filename: String
-        }
-    ],
+    images: [ImageSchema],
     price: Number,
     description: String,
     location: String,
